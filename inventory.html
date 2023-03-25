@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Inventory Checklist</title>
+  </head>
+
+  <body>
+    <div>
+      <label for="checkAll">Check all</label>
+      <input type="checkbox" id="checkAll">
+    </div>
+    <div>
+      <label for="Deku Stick">Deku Stick</label>
+      <input type="checkbox" id="Deku Stick">
+    </div>
+    <div>
+      <label for="Deku Nut">Deku Nut</label>
+      <input type="checkbox" id="Deku Nut">
+    </div>
+    <div>
+      <label for="Fairy Slingshot">Fairy Slingshot</label>
+      <input type="checkbox" id="Fairy Slingshot">
+    </div>
+    <div>
+      <label for="Din's Fire">Din's Fire</label>
+      <input type="checkbox" id="Din's Fire">
+    </div>
+    <div>
+      <label for="Bomb">Bomb</label>
+      <input type="checkbox" id="Bomb">
+    </div>
+    <div>
+      <label for="Bombchu">Bombchu</label>
+      <input type="checkbox" id="Bombchu">
+    </div>
+    <div>
+      <label for="Fairy Bow">Fairy Bow</label>
+      <input type="checkbox" id="Fairy Bow">
+    </div>
+    <div>
+      <label for="Farore's Wind">Farore's Wind</label>
+      <input type="checkbox" id="Farore's Wind">
+    </div>
+    <div>
+      <label for="Boomerang">Boomerang</label>
+      <input type="checkbox" id="Boomerang">
+    </div>
+    <div>
+      <label for="Hookshot">Hookshot</label>
+      <input type="checkbox" id="Hookshot">
+    </div>
+    <div>
+      <label for="Fire Arrows">Fire Arrows</label>
+      <input type="checkbox" id="Fire Arrows">
+    </div>
+    <div>
+      <label for="Nayru's Love">Nayru's Love</label>
+      <input type="checkbox" id="Nayru's Love">
+    </div>
+    <div>
+      <label for="Bottle #1">Bottle #1</label>
+      <input type="checkbox" id="Bottle #1">
+    </div>
+    <div>
+      <label for="Bottle #2">Bottle #2</label>
+      <input type="checkbox" id="Bottle #2">
+    </div>
+    <div>
+      <label for="Bottle #3">Bottle #3</label>
+      <input type="checkbox" id="Bottle #3">
+    </div>
+    <div>
+      <label for="Bottle #4">Bottle #4</label>
+      <input type="checkbox" id="Bottle #4">
+    </div>
+    <div>
+      <label for="Lens of Truth">Lens of Truth</label>
+      <input type="checkbox" id="Lens of Truth">
+    </div>
+    <div>
+      <label for="Child Sidequest">Child Sidequest</label>
+      <input type="checkbox" id="Child Sidequest">
+    </div>
+    <div>
+      <label for="Ice Arrows">Ice Arrows</label>
+      <input type="checkbox" id="Ice Arrows">
+    </div>
+    <div>
+      <label for="Magic Beans">Magic Beans</label>
+      <input type="checkbox" id="Magic Beans">
+    </div>
+    <div>
+      <label for="Megaton Hammer">Megaton Hammer</label>
+      <input type="checkbox" id="Megaton Hammer">
+    </div>
+    <div>
+      <label for="Adult Sidequest">Adult Sidequest</label>
+      <input type="checkbox" id="Adult Sidequest">
+    </div>
+    <div>
+      <label for="Light Arrows">Light Arrows</label>
+      <input type="checkbox" id="Light Arrows">
+    </div>
+    <div>
+      <label for="Ocarina">Ocarina</label>
+      <input type="checkbox" id="Ocarina">
+    </div>
+    <!-- checkbox logic. I got it working in the end with this cookies thing -->
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://cdn.jsdelivr.net/jquery.cookie/1.4.0/jquery.cookie.min.js"></script>
+
+    <script>
+      $("#checkAll").on("change", function() {
+        $(':checkbox').not(this).prop('checked', this.checked);
+      });
+
+      $(":checkbox").on("change", function(){
+        var checkboxValues = {};
+        $(":checkbox").each(function(){
+          checkboxValues[this.id] = this.checked;
+        });
+        $.cookie('checkboxValues', checkboxValues, { expires: 700, path: '/' })
+      });
+
+      function repopulateCheckboxes(){
+        var checkboxValues = $.cookie('checkboxValues');
+        if(checkboxValues){
+          Object.keys(checkboxValues).forEach(function(element) {
+            var checked = checkboxValues[element];
+            $("#" + element).prop('checked', checked);
+          });
+        }
+      }
+
+      $.cookie.json = true;
+      repopulateCheckboxes();
+    </script>
+  </body>
+</html>

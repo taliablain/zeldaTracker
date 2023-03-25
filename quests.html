@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Inventory Checklist</title>
+  </head>
+
+  <body>
+    <div>
+      <label for="checkAll">Check all</label>
+      <input type="checkbox" id="checkAll">
+    </div>
+    <div>
+        <label for="Kokiri Emerald">Kokiri Emerald</label>
+        <input type="checkbox" id="Kokiri Emerald">
+    </div>
+    <div>
+        <label for="Goron Ruby">Goron Ruby</label>
+        <input type="checkbox" id="Goron Ruby">
+    </div>
+    <div>
+        <label for="Zora Sapphire">Zora Sapphire</label>
+        <input type="checkbox" id="Zora Sapphire">
+    </div>
+    <div>
+        <label for="Light Medallion">Light Medallion</label>
+        <input type="checkbox" id="Light Medallion">
+    </div>
+    <div>
+        <label for="Forest Medallion">Forest Medallion</label>
+        <input type="checkbox" id="Forest Medallion">
+    </div>
+    <div>
+        <label for="Fire Medallion">Fire Medallion</label>
+        <input type="checkbox" id="Fire Medallion">
+    </div>
+    <div>
+        <label for="Water Medallion">Water Medallion</label>
+        <input type="checkbox" id="Water Medallion">
+    </div>
+    <div>
+        <label for="Shadow Medallion">Shadow Medallion</label>
+        <input type="checkbox" id="Shadow Medallion">
+    </div>
+    <div>
+        <label for="Spirit Medallion">Spirit Medallion</label>
+        <input type="checkbox" id="Spirit Medallion">
+    </div>
+    <div>
+        <label for="Stone Agony">Stone Agony</label>
+        <input type="checkbox" id="Stone Agony">
+    </div>
+    <div>
+        <label for="Gerudo Token">Gerudo Token</label>
+        <input type="checkbox" id="Gerudo Token">
+    </div>
+    <div>
+        <label for="Wallet">Wallet</label>
+        <input type="checkbox" id="Wallet">
+    </div>
+    <div>
+        <label for="Strength">Strength</label>
+        <input type="checkbox" id="Strength">
+    </div>
+    <div>
+        <label for="Scale"Scale></label>
+        <input type="checkbox" id="Scale">
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- checkbox logic. I got it working in the end with this cookies thing -->
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://cdn.jsdelivr.net/jquery.cookie/1.4.0/jquery.cookie.min.js"></script>
+
+<script>
+  $("#checkAll").on("change", function() {
+    $(':checkbox').not(this).prop('checked', this.checked);
+  });
+
+  $(":checkbox").on("change", function(){
+    var checkboxValues = {};
+    $(":checkbox").each(function(){
+      checkboxValues[this.id] = this.checked;
+    });
+    $.cookie('checkboxValues', checkboxValues, { expires: 700, path: '/' })
+  });
+
+  function repopulateCheckboxes(){
+    var checkboxValues = $.cookie('checkboxValues');
+    if(checkboxValues){
+      Object.keys(checkboxValues).forEach(function(element) {
+        var checked = checkboxValues[element];
+        $("#" + element).prop('checked', checked);
+      });
+    }
+  }
+
+  $.cookie.json = true;
+  repopulateCheckboxes();
+</script>
+</body>
+</html>
