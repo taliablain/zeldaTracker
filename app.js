@@ -15,21 +15,3 @@ for(let i = 1; i <= boxes; i++){
   }
 }
 window.addEventListener('change', save);
-
-function save(){
-  var checkbox = document.getElementById('checkbox');
-  localStorage.setItem('checkbox1zaal1', checkbox.checked);
-}
-
-function load(){    
-  var checked = JSON.parse(localStorage.getItem('checkbox'));
-  document.getElementById("checkbox1").checked = checked;
-}
-
-function wis(){
-  location.reload();
-  localStorage.clear()
-
-}
-
-load();
